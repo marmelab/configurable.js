@@ -1,0 +1,10 @@
+{
+  "name": "configurable",
+  "version": "0.0.0",
+  "description": "Make a function configurable",
+  "main": "configurable.js",
+  "author": "thiery <thiery@marmelab.com>",
+  "devDependencies": {
+    "mocha": "^2.1.0"
+  }
+}

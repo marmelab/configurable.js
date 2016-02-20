@@ -1,5 +1,5 @@
 {
-  "name": "configurable",
+  "name": "configurable.js",
   "version": "0.1.0",
   "description": "Make a function configurable",
   "main": "configurable.js",

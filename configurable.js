@@ -14,6 +14,8 @@ function configurable(targetFunction, config) {
     for (var item in config) {
         targetFunction[item] = configure(item);
     }
+
+    return targetFunction;
 }
 
 if('object' == typeof exports && 'undefined' != typeof module) {

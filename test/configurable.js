@@ -2,23 +2,31 @@ var assert = require('assert');
 var configurable = require('../configurable');
 
 describe('configurable', function () {
-    it ('should configure given function', function () {
+    var greet;
+
+    beforeEach(function () {
         var config = {
-            message: 'hello'
+            message: 'hello',
+            firstname: 'you'
         };
 
-        var greet = function () {
-            return config.message;
-        };
+        greet = configurable(function () {
+            return this.config.message + ' ' + this.config.firstname;
+        }, config);
+    });
 
-        configurable(greet, config);
+    it ('should add configuration function for each key in config', function () {
+        assert.equal(greet.message(), 'hello');
+        assert.equal(greet.firstname(), 'you');
+        assert.equal(greet(), 'hello you');
+
+        var hiGreet = greet.message('Hi').firstname('John');
+
+        assert.equal(hiGreet.message(), 'Hi');
+        assert.equal(hiGreet.firstname(), 'John');
+        assert.equal(hiGreet(), 'Hi John');
 
         assert.equal(greet.message(), 'hello');
-        assert.equal(greet(), 'hello');
-
-        greet.message('Hi');
-
-        assert.equal(greet.message(), 'Hi');
-        assert.equal(greet(), 'Hi');
+        assert.equal(greet(), 'hello you');
     });
 });

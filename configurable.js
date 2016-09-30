@@ -5,17 +5,19 @@ function configurable(targetFunction, config) {
     function configure(item) {
         return function(value) {
             if (!arguments.length) return config[item];
-            config[item] = value;
+            const newConfig = Object.assign({}, config, { [item]: value });
 
-            return targetFunction;
+            return configurable(targetFunction, newConfig);
         };
     }
 
+    const configurableFunction = targetFunction.bind({ config: config });
+
     for (var item in config) {
-        targetFunction[item] = configure(item);
+        configurableFunction[item] = configure(item);
     }
 
-    return targetFunction;
+    return configurableFunction;
 }
 
 if('object' == typeof exports && 'undefined' != typeof module) {

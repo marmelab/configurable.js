@@ -12,9 +12,9 @@ function bar() {
     console.log('foo value is', this.config.foo);
 }
 
-bar.bind({ congig: { foo: 1 } })(); // 'foo value is 1'
+bar.bind({ config: { foo: 1 } })(); // 'foo value is 1'
 config.foo = 3;
-bar.bind({ congig: { foo: 3 } })(); // 'foo value is 3'
+bar.bind({ config: { foo: 3 } })(); // 'foo value is 3'
 ```
 The configurable behavior modifies the function object, adding one
 method for each item in the configuration.

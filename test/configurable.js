@@ -3,13 +3,12 @@ var configurable = require('../configurable');
 
 describe('configurable', function () {
     var greet;
+    var config = {
+        message: 'hello',
+        firstname: 'you'
+    };
 
     beforeEach(function () {
-        var config = {
-            message: 'hello',
-            firstname: 'you'
-        };
-
         greet = configurable(function () {
             return this.config.message + ' ' + this.config.firstname;
         }, config);
@@ -28,5 +27,25 @@ describe('configurable', function () {
 
         assert.equal(greet.message(), 'hello');
         assert.equal(greet(), 'hello you');
+    });
+
+    it ('should work with literal', function () {
+        greeter = configurable({
+            greet() {
+                return this.config.message + ' ' + this.config.firstname;
+            },
+            reverse() {
+                return this.config.firstname + ' ' + this.config.message;
+            }
+        }, config);
+        assert.equal(greeter.greet(), 'hello you');
+        assert.equal(greeter.reverse(), 'you hello');
+
+        var hiGreeter = greeter.message('Hi').firstname('John');
+
+        assert.equal(hiGreeter.message(), 'Hi');
+        assert.equal(hiGreeter.firstname(), 'John');
+        assert.equal(hiGreeter.greet(), 'Hi John');
+        assert.equal(hiGreeter.reverse(), 'John Hi');
     });
 });

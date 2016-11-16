@@ -42,3 +42,24 @@ bar2.foo(); // 2
 bar1.foo(); // 1
 bar1(); // 'foo value is 1'
 ```
+
+You can also configure a literal of function, this allow for several function to share the same config.
+
+```js
+var foo = {
+    bar: function bar() {
+        console.log('bar value is', this.config.bar);
+    }
+    reverseBar: function barLength() {
+        console.log('reversed bar value is', this.config.bar.split('').reverse().join(''));
+    }
+}
+
+var foo1 = configurable(foo, { bar: 'hello' });
+foo1.logBar(); // bar value is hello
+foo1.logRab(); // reversed bar value is olleh
+
+var foo2 = foo1.foo(')
+foo2.logBar(); // 'bar value is bye'
+foo2.rab(); // 'reversed bar value is yeb'
+```

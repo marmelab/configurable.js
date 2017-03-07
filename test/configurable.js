@@ -48,4 +48,14 @@ describe('configurable', function () {
         assert.equal(hiGreeter.greet(), 'Hi John');
         assert.equal(hiGreeter.reverse(), 'John Hi');
     });
+
+    it ('should throw an error wen config would override a target key', function () {
+        assert.throws(function () {
+            configurable({
+                bar() {
+                    return this.config.bar;
+                },
+            }, { bar: 'hello' });
+        }, 'config property would override key from target');
+    });
 });

@@ -12,8 +12,17 @@ function bind(data, config) {
     return data;
 }
 
-function configurable(targetFunction, config) {
+function checkConflict(target, config) {
+    const configKeys = Object.keys(config);
+    Object.keys(target).forEach(key => {
+        if (configKeys.includes(key)) {
+            throw new Error('config property would override key from target');
+        }
+    });
+}
 
+function configurable(targetFunction, config) {
+    checkConflict(targetFunction, config);
     function configure(item) {
         return function(value) {
             if (!arguments.length) return config[item];

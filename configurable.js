@@ -14,8 +14,8 @@ function bind(data, config) {
 
 function checkConflict(target, config) {
     const configKeys = Object.keys(config);
-    Object.keys(target).forEach(key => {
-        if (configKeys.includes(key)) {
+    configKeys.forEach(key => {
+        if (target[key]) {
             throw new Error('config property would override key from target');
         }
     });

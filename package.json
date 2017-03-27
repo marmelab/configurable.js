@@ -1,13 +1,13 @@
 {
   "name": "configurable.js",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Make a function configurable",
   "main": "configurable.js",
   "author": "marmelab",
   "devDependencies": {
     "mocha": "^2.1.0"
   },
-  "typings":"typings.d.ts",
+  "typings": "typings.d.ts",
   "scripts": {
     "test": "node_modules/mocha/bin/mocha"
   }
